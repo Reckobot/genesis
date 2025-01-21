@@ -1,0 +1,14 @@
+option.ALPHACRAFT =AlphaPack
+option.ALPHACRAFT.comment =Made by Recko! If you want to contact him, his username on discord is "reckobot".
+option.DISCLAIMER =DISABLE SMOOTH LIGHTING
+option.DISCLAIMER.comment =As of right now, the shader CANNOT change the smooth lighting option, so you have to disable it yourself in video settings.
+value.DISCLAIMER.0 =PLEASE
+
+value.ALPHACRAFT.0 =Version 1.0
+
+value.RENDER_DISTANCE.1 =FAR
+value.RENDER_DISTANCE.2 =NORMAL
+value.RENDER_DISTANCE.3 =SHORT
+value.RENDER_DISTANCE.4 =TINY
+
+option.RENDER_DISTANCE =Render distance
