@@ -50,28 +50,16 @@ void main() {
 
 	#if RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
 		if (doFog){
-			if (texture(colortex3, texcoord) == vec4(0)){
-				float dist = length(viewPos) / (64/renderdist*fogdensity);
-				float fogFactor = exp(-4*fogdensity * (1.0 - dist));
-				color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
-			}else{
-				float dist = length(viewPos) / (64*3/renderdist*fogdensity);
-				float fogFactor = exp(-4*fogdensity * (1.0 - dist));
-				color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
-			}
+			float dist = length(viewPos) / (64/renderdist*fogdensity);
+			float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 		}
 	#else
 		fogcolor = alphaFogColor;
 		fogcolor = BSC(fogcolor, getLuminance(skyColor)*1.5, 1.0, 1.0);
 		fogdensity = 1.0;
-		if (texture(colortex3, texcoord) == vec4(0)){
-			float dist = length(viewPos) / (64/renderdist*fogdensity);
-			float fogFactor = exp(-4*fogdensity * (1.0 - dist));
-			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
-		}else{
-			float dist = length(viewPos) / (64*3/renderdist*fogdensity);
-			float fogFactor = exp(-4*fogdensity * (1.0 - dist));
-			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
-		}
+		float dist = length(viewPos) / (64/renderdist*fogdensity);
+		float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+		color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 	#endif
 }
