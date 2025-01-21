@@ -1,8 +1,8 @@
-option.ALPHACRAFT =AlphaPack
+option.ALPHACRAFT =AlphaCraft
 option.ALPHACRAFT.comment =Made by Recko! If you want to contact him, his username on discord is "reckobot".
-option.DISCLAIMER =DISABLE SMOOTH LIGHTING
+option.DISCLAIMER =TURN OFF SMOOTH LIGHTING
 option.DISCLAIMER.comment =As of right now, the shader CANNOT change the smooth lighting option, so you have to disable it yourself in video settings.
-value.DISCLAIMER.0 =PLEASE
+value.DISCLAIMER.0 =IN OPTIONS
 
 value.ALPHACRAFT.0 =Version 1.0
 
