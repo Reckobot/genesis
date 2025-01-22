@@ -26,7 +26,7 @@ void main() {
 
 	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
 		if (depth != texture(depthtex1, texcoord).r){
-			color.rgb *= clamp(getLuminance(normal)+0.65, 0.65, 1.0);
+			color.rgb *= clamp(getLuminance(normal)+0.6, 0.7, 1.0);
 		}
 	}
 	color.rgb *= texture(colortex1, texcoord).rgb;
