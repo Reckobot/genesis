@@ -1,5 +1,6 @@
 #version 330 compatibility
 #include "/lib/common.glsl"
+#include "/lib/settings.glsl"
 
 uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
@@ -21,9 +22,13 @@ layout(location = 1) out vec4 light;
 layout(location = 2) out vec4 encodedNormal;
 
 void main() {
+	float brightness = 6;
+	#if PRESET == 1
+		brightness = 4;
+	#endif
 	if (bool(isWater)){
 		vec4 waterColor = vec4(vec3(0,0,1), 1);
-		waterColor.rgb = BSC(waterColor.rgb, 6, 0.2, 1.0);
+		waterColor.rgb = BSC(waterColor.rgb, brightness, 0.2, 1.0);
 		color = texture(gtexture, texcoord) * waterColor;
 		color.a = 0.75;
 	}else{
@@ -34,7 +39,7 @@ void main() {
 	light = texture(lightmap, lmc);
 	light.rgb = BSC(light.rgb, 0.7, 1.0, 4.0);
 	light.rgb = vec3(increment(light.r, 1, 8), increment(light.g, 1, 8), increment(light.b, 1, 8));
-	light.rgb = clamp(light.rgb, 0.045, 100.0);
+	light.rgb = clamp(light.rgb, 0.045, 1.0);
 	if (color.a < alphaTestRef) {
 		discard;
 	}

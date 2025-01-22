@@ -1,5 +1,6 @@
 #version 330 compatibility
 #include "/lib/common.glsl"
+#include "/lib/settings.glsl"
 
 uniform sampler2D lightmap;
 uniform sampler2D gtexture;
@@ -22,14 +23,22 @@ layout(location = 1) out vec4 light;
 layout(location = 2) out vec4 encodedNormal;
 
 void main() {
-	if ((bool(isTintedAlpha))&&((((glcolor.r + glcolor.b)/2) - glcolor.g) <= -0.1)){
-		vec3 tintcolor = vec3(0.27, 0.8, 0.2);
-		vec4 tint = vec4(tintcolor, glcolor.a);
-		color = texture(gtexture, texcoord) * tint;
-		color.rgb = BSC(color.rgb, 1.6, tintSaturation, tintContrast);
-	}else{
-		color = texture(gtexture, texcoord) * glcolor;
-	}
+	#if PRESET == 0
+		if ((bool(isTintedAlpha))&&((((glcolor.r + glcolor.b)/2) - glcolor.g) <= -0.1)){
+			vec3 tintcolor = vec3(0.27, 0.8, 0.2);
+			vec4 tint = vec4(tintcolor, glcolor.a);
+			color = texture(gtexture, texcoord) * tint;
+			color.rgb = BSC(color.rgb, 1.6, tintSaturation, tintContrast);
+		}else{
+			color = texture(gtexture, texcoord) * glcolor;
+		}
+	#else
+		if (bool(isTintedAlpha)){
+			color = texture(gtexture, texcoord) * vec4(BSC(glcolor.rgb, 1.0, 1.2, 1.0), 1);
+		}else{
+			color = texture(gtexture, texcoord) * glcolor;
+		}
+	#endif
 	vec2 lmc = lmcoord;
 	light = texture(lightmap, lmc);
 	light.rgb = BSC(light.rgb, 0.7, 0.0, 4.0);

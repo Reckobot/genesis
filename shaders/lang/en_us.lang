@@ -1,14 +1,21 @@
 option.ALPHACRAFT =AlphaCraft
 option.ALPHACRAFT.comment =Made by Recko! If you want to contact him, his username on discord is "reckobot".
-option.DISCLAIMER =TURN OFF SMOOTH LIGHTING
+option.DISCLAIMER =Note
 option.DISCLAIMER.comment =As of right now, the shader CANNOT change the smooth lighting option, so you have to disable it yourself in video settings.
-value.DISCLAIMER.0 =
+value.DISCLAIMER.0 =HOVER FOR INFO
 
-value.ALPHACRAFT.0 =Version 1.0
+value.ALPHACRAFT.0 =v1.0
 
 value.RENDER_DISTANCE.1 =FAR
 value.RENDER_DISTANCE.2 =NORMAL
 value.RENDER_DISTANCE.3 =SHORT
 value.RENDER_DISTANCE.4 =TINY
+option.RENDER_DISTANCE.comment =Herobrine reference
 
 option.RENDER_DISTANCE =Render distance
+
+option.PRESET =Preset
+value.PRESET.0 = ALPHA
+value.PRESET.1 = BETA
+value.PRESET.0.comment =Brighter colors, vibrant
+value.PRESET.1.comment =Dimmer colors, easier on the eyes
