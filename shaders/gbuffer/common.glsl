@@ -43,7 +43,7 @@ void main() {
 	#endif
 	vec2 lmc = lmcoord;
 	light = texture(lightmap, lmc);
-	light.rgb = BSC(light.rgb, 0.7, 0.0, 4.0);
+	light.rgb = BSC(light.rgb, 0.7, 0.0, 3.0);
 
 	float ambient;
 
