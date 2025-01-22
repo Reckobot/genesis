@@ -16,6 +16,7 @@ flat in int isTintedAlpha;
 in float tintSaturation;
 in float tintContrast;
 flat in int isEntityShadow;
+flat in int isLeaves;
 
 /* RENDERTARGETS: 0,1,2 */
 layout(location = 0) out vec4 color;
@@ -52,9 +53,21 @@ void main() {
 	}
 
 	light.rgb = clamp(light.rgb, ambient, 1.0);
-	if (color.a < alphaTestRef) {
-		discard;
-	}
+	#ifdef FAST_LEAVES
+		if (bool(isLeaves)){
+			if (color.a < alphaTestRef) {
+				discard;
+			}
+		}else{
+			if (color.a < alphaTestRef) {
+				color.rgb *= 0.75;
+			}
+		}
+	#else
+		if (color.a < alphaTestRef) {
+			discard;
+		}
+	#endif
 
 	if (bool(isEntityShadow)){
 		discard;

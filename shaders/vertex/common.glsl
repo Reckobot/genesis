@@ -8,6 +8,7 @@ out vec3 normal;
 
 flat out int isTintedAlpha;
 flat out int isEntityShadow;
+flat out int isLeaves;
 out float tintSaturation;
 out float tintContrast;
 
@@ -28,7 +29,7 @@ void main() {
 	normal = gl_NormalMatrix * gl_Normal;
 	normal = mat3(gbufferModelViewInverse) * normal;
 
-	if ((mc_Entity.x == 100)||(mc_Entity.x == 101)){
+	if ((mc_Entity.x >= 100)&&(mc_Entity.x <= 102)){
 		isTintedAlpha = 1;
 	}else{
 		isTintedAlpha = 0;
@@ -40,5 +41,11 @@ void main() {
 	}else{
 		tintSaturation = 1.1;
 		tintContrast = 1.0;
+	}
+
+	if (mc_Entity.x != 100){
+		isLeaves = 1;
+	}else{
+		isLeaves = 0;
 	}
 }
