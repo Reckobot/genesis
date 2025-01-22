@@ -4,7 +4,7 @@ option.DISCLAIMER =Note
 option.DISCLAIMER.comment =As of right now, the shader CANNOT change the smooth lighting option, so you have to disable it yourself in video settings.
 value.DISCLAIMER.0 =HOVER FOR INFO
 
-value.ALPHACRAFT.0 =v1.3
+value.ALPHACRAFT.0 =v2.0
 
 value.RENDER_DISTANCE.1 =FAR
 value.RENDER_DISTANCE.2 =NORMAL
@@ -14,6 +14,7 @@ option.RENDER_DISTANCE.comment =Herobrine reference
 
 option.RENDER_DISTANCE =Render distance
 option.FAST_LEAVES =Fast leaves
+option.INVISIBLE_GRASS =Invisible grass
 
 option.PRESET =Preset
 value.PRESET.0 = ALPHA

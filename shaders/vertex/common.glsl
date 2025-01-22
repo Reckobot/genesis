@@ -9,8 +9,8 @@ out vec3 normal;
 flat out int isTintedAlpha;
 flat out int isEntityShadow;
 flat out int isLeaves;
+flat out int isGrass;
 out float tintSaturation;
-out float tintContrast;
 
 uniform int entityId;
 
@@ -36,16 +36,20 @@ void main() {
 	}
 
 	if (mc_Entity.x == 101){
-		tintSaturation = 0.7;
-		tintContrast = 1.2;
+		tintSaturation = 1.0;
 	}else{
-		tintSaturation = 1.1;
-		tintContrast = 1.0;
+		tintSaturation = 1.5;
 	}
 
 	if (mc_Entity.x != 100){
 		isLeaves = 1;
 	}else{
 		isLeaves = 0;
+	}
+
+	if (mc_Entity.x == 102){
+		isGrass = 1;
+	}else{
+		isGrass = 0;
 	}
 }

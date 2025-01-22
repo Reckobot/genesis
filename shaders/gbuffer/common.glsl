@@ -14,9 +14,9 @@ in vec4 glcolor;
 
 flat in int isTintedAlpha;
 in float tintSaturation;
-in float tintContrast;
 flat in int isEntityShadow;
 flat in int isLeaves;
+flat in int isGrass;
 
 /* RENDERTARGETS: 0,1,2 */
 layout(location = 0) out vec4 color;
@@ -26,10 +26,11 @@ layout(location = 2) out vec4 encodedNormal;
 void main() {
 	#if PRESET == 0
 		if ((bool(isTintedAlpha))&&((((glcolor.r + glcolor.b)/2) - glcolor.g) <= -0.1)){
-			vec3 tintcolor = vec3(0.27, 0.8, 0.2);
+			vec3 tintcolor = vec3(0.4, 0.8, 0.2);
 			vec4 tint = vec4(tintcolor, glcolor.a);
+			tint.rgb = BSC(tint.rgb, 1.7, (1-getLuminance(texture(gtexture, texcoord).rgb))*2.4*tintSaturation, 1.0);
 			color = texture(gtexture, texcoord) * tint;
-			color.rgb = BSC(color.rgb, 1.6, tintSaturation, tintContrast);
+			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.75);
 		}else{
 			color = texture(gtexture, texcoord) * glcolor;
 		}
@@ -60,7 +61,7 @@ void main() {
 			}
 		}else{
 			if (color.a < alphaTestRef) {
-				color.rgb *= 0.75;
+				color.rgb *= 0.25;
 			}
 		}
 	#else
@@ -74,4 +75,11 @@ void main() {
 	}
 
 	encodedNormal = vec4(normal * 0.5 + 0.5, 1.0);
+	color.a = 1;
+
+	#ifdef INVISIBLE_GRASS
+		if (bool(isGrass)){
+			discard;
+		}
+	#endif
 }
