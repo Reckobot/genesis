@@ -1,5 +1,6 @@
 #version 330 compatibility
 #include "/lib/common.glsl"
+#include "/lib/settings.glsl"
 
 out vec2 lmcoord;
 out vec2 texcoord;
@@ -12,7 +13,7 @@ in vec2 mc_Entity;
 
 void main() {
 	vec4 offset = gl_Vertex;
-	offset.y -= 75;
+	offset.y += CLOUD_OFFSET;
 	gl_Position = gl_ModelViewProjectionMatrix * (offset);
 	texcoord = (gl_TextureMatrix[0] * gl_MultiTexCoord0).xy;
 	lmcoord = (gl_TextureMatrix[1] * gl_MultiTexCoord1).xy;

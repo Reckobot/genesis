@@ -31,12 +31,14 @@ void main() {
 			tint.rgb = BSC(tint.rgb, 1.7, (1-getLuminance(texture(gtexture, texcoord).rgb))*2.4*tintSaturation, 1.0);
 			color = texture(gtexture, texcoord) * tint;
 			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.75);
+			color.rgb = BSC(color.rgb, FOLIAGE_BRIGHTNESS, FOLIAGE_SATURATION, FOLIAGE_CONTRAST);
 		}else{
 			color = texture(gtexture, texcoord) * glcolor;
 		}
 	#else
 		if (bool(isTintedAlpha)){
 			color = texture(gtexture, texcoord) * vec4(BSC(glcolor.rgb, 1.0, 1.2, 1.0), 1);
+			color.rgb = BSC(color.rgb, FOLIAGE_BRIGHTNESS, FOLIAGE_SATURATION, FOLIAGE_CONTRAST);
 		}else{
 			color = texture(gtexture, texcoord) * glcolor;
 		}

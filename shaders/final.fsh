@@ -7,6 +7,7 @@ uniform sampler2D colortex0;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
 uniform sampler2D colortex3;
+uniform sampler2D colortex6;
 
 in vec2 texcoord;
 
@@ -61,5 +62,14 @@ void main() {
 		float dist = length(viewPos) / (64/renderdist*fogdensity);
 		float fogFactor = exp(-4*fogdensity * (1.0 - dist));
 		color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
+	#endif
+
+	color.rgb = BSC(color.rgb, BRIGHTNESS, SATURATION, CONTRAST);
+
+	#ifdef WATERMARK
+		ivec2 coord = ivec2(texcoord*vec2(viewWidth, viewHeight))/ivec2(WATERMARK_SCALE);
+		coord.y = int(viewHeight/(WATERMARK_SCALE+0.005)) - coord.y;
+		vec4 watermark = texelFetch(colortex6, coord, 0);
+		color.rgb = mix(color.rgb, watermark.rgb, watermark.a);
 	#endif
 }
