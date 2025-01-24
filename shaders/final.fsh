@@ -1,6 +1,7 @@
 #version 330 compatibility
 #include "/lib/common.glsl"
 #include "/lib/settings.glsl"
+#include "/lib/tonemap.glsl"
 
 uniform sampler2D depthtex0;
 uniform sampler2D colortex0;
@@ -49,19 +50,34 @@ void main() {
 		renderdist = 2.25;
 	#endif
 
-	#if RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
-		if (doFog){
+	#ifdef TONEMAP
+		if (depth < 1){
+			color.rgb = aces(color.rgb);
+			color.rgb = BSC(color.rgb, 1.0, 1.0, 1.2);
+		}
+	#endif
+
+	#if RENDER_DISTANCE != 6 && RENDER_DISTANCE != 5
+		#if RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
+			if (doFog){
+				float dist = length(viewPos) / (64/renderdist*fogdensity);
+				float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+				color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
+			}
+		#else
+			fogcolor = alphaFogColor;
+			fogcolor = BSC(fogcolor, getLuminance(skyColor)*1.5, 1.0, 1.0);
+			fogdensity = 0.9;
 			float dist = length(viewPos) / (64/renderdist*fogdensity);
 			float fogFactor = exp(-4*fogdensity * (1.0 - dist));
 			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
+		#endif
+	#elif RENDER_DISTANCE == 5
+		if (doFog){
+			float dist = length(viewPos) / (far);
+			float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 		}
-	#else
-		fogcolor = alphaFogColor;
-		fogcolor = BSC(fogcolor, getLuminance(skyColor)*1.5, 1.0, 1.0);
-		fogdensity = 0.9;
-		float dist = length(viewPos) / (64/renderdist*fogdensity);
-		float fogFactor = exp(-4*fogdensity * (1.0 - dist));
-		color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 	#endif
 
 	color.rgb = BSC(color.rgb, BRIGHTNESS, SATURATION, CONTRAST);

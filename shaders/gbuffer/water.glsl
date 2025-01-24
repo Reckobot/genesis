@@ -2,6 +2,8 @@
 #include "/lib/common.glsl"
 #include "/lib/settings.glsl"
 
+uniform sampler2D specular;
+uniform sampler2D normals;
 uniform sampler2D depthtex0;
 uniform sampler2D depthtex1;
 uniform sampler2D lightmap;
@@ -13,13 +15,21 @@ uniform float alphaTestRef = 0.1;
 in vec2 lmcoord;
 in vec2 texcoord;
 in vec4 glcolor;
+in mat3 tbnmatrix;
 
 flat in int isWater;
 
-/* RENDERTARGETS: 0,1,2 */
+/* RENDERTARGETS: 0,1,2,5 */
 layout(location = 0) out vec4 color;
 layout(location = 1) out vec4 light;
 layout(location = 2) out vec4 encodedNormal;
+layout(location = 3) out vec4 encodedSpecular;
+
+vec3 getnormalmap(vec2 texcoord){
+	vec3 normalmap = texture(normals, texcoord).rgb;
+	normalmap = normalmap * 2 - 1;
+	return tbnmatrix * normalmap;
+}
 
 void main() {
 	float brightness = 5;
@@ -45,5 +55,11 @@ void main() {
 	}
 	color *= light;
 
-	encodedNormal = vec4(normal * 0.5 + 0.5, 1.0);
+	#ifdef LABPBR
+	encodedNormal = vec4(getnormalmap(texcoord) * 1 + 0.5, 1.0);
+	encodedSpecular = vec4(1);
+	#else
+	encodedNormal = vec4(mat3(gbufferModelViewInverse) * normal * 0.5 + 0.5, 1.0);
+	encodedSpecular = vec4(1);
+	#endif
 }

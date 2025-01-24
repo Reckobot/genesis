@@ -4,12 +4,14 @@ option.DISCLAIMER = Note
 option.DISCLAIMER.comment = As of right now, the shader CANNOT change the smooth lighting option, so you have to disable it yourself in video settings.
 value.DISCLAIMER.0 = HOVER FOR INFO
 
-value.ALPHACRAFT.0 = v1.2
+value.ALPHACRAFT.0 = v2.0
 
 value.RENDER_DISTANCE.1 = FAR
 value.RENDER_DISTANCE.2 = NORMAL
 value.RENDER_DISTANCE.3 = SHORT
 value.RENDER_DISTANCE.4 = TINY
+value.RENDER_DISTANCE.5 = WORLD BORDER
+value.RENDER_DISTANCE.6 = NO FOG
 option.RENDER_DISTANCE.comment = Herobrine reference
 
 option.RENDER_DISTANCE = Render distance
@@ -17,9 +19,14 @@ option.FAST_LEAVES = Fast leaves
 option.INVISIBLE_GRASS = Invisible grass
 option.CLOUD_OFFSET = Cloud height offset
 
+option.TONEMAP = Tonemapping
+
 option.BRIGHTNESS = Brightness
 option.SATURATION = Saturation
 option.CONTRAST = Contrast
+
+option.AMBIENT_BRIGHTNESS = Ambient brightness
+option.SUN_BRIGHTNESS = Sun brightness
 
 option.WATER_TRANSPARENCY = Transparency
 option.WATER_BRIGHTNESS = Brightness
@@ -29,6 +36,13 @@ option.WATER_CONTRAST = Contrast
 option.FOLIAGE_BRIGHTNESS = Brightness
 option.FOLIAGE_SATURATION = Saturation
 option.FOLIAGE_CONTRAST = Contrast
+
+option.STANDARD_LIGHTING = Fancy lighting
+option.LABPBR = LabPBR Normals
+option.COLORED_LIGHTMAP = Colored lightmap
+
+option.SHADOW_RES = Shadow resolution
+option.SHADOW_DIST = Shadow distance
 
 option.WATERMARK = Alpha watermark
 option.WATERMARK_SCALE = Alpha watermark scale

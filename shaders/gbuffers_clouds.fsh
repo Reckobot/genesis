@@ -1,5 +1,6 @@
 #version 330 compatibility
 #include "/lib/common.glsl"
+#include "/lib/settings.glsl"
 
 uniform sampler2D lightmap;
 uniform sampler2D gtexture;
@@ -31,6 +32,9 @@ void main() {
 	vec4 light = texture(lightmap, lmcoord);
 	light.rgb = BSC(light.rgb, 0.75, 1.0, 2.0);
 	color *= light;
+	#ifdef TONEMAP
+		color.rgb *= 1.25;
+	#endif
 	if (color.a < alphaTestRef) {
 		discard;
 	}
