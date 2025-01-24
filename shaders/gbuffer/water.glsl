@@ -38,7 +38,7 @@ void main() {
 
 	vec2 lmc = lmcoord;
 	light = texture(lightmap, lmc);
-	light.rgb = BSC(light.rgb, 0.7, 1.0, 4.0);
+	light.rgb = BSC(light.rgb, 0.8, 1.0, 2.0);
 	light.rgb = clamp(light.rgb, 0.045, 1.0);
 	if (color.a < alphaTestRef) {
 		discard;

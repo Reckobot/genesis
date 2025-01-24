@@ -28,7 +28,7 @@ void main() {
 		if ((bool(isTintedAlpha))&&((((glcolor.r + glcolor.b)/2) - glcolor.g) <= -0.1)){
 			vec3 tintcolor = vec3(0.4, 0.8, 0.2);
 			vec4 tint = vec4(tintcolor, glcolor.a);
-			tint.rgb = BSC(tint.rgb, 1.7, (1-getLuminance(texture(gtexture, texcoord).rgb))*2.4*tintSaturation, 1.0);
+			tint.rgb = BSC(tint.rgb, 1.7, (1-getLuminance(texture(gtexture, texcoord).rgb))*2.3*tintSaturation, 1.0);
 			color = texture(gtexture, texcoord) * tint;
 			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.75);
 			color.rgb = BSC(color.rgb, FOLIAGE_BRIGHTNESS, FOLIAGE_SATURATION, FOLIAGE_CONTRAST);
@@ -45,7 +45,7 @@ void main() {
 	#endif
 	vec2 lmc = lmcoord;
 	light = texture(lightmap, lmc);
-	light.rgb = BSC(light.rgb, 0.7, 0.0, 3.0);
+	light.rgb = BSC(light.rgb, 0.8, 0.0, 2.0);
 
 	float ambient;
 

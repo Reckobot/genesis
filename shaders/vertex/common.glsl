@@ -38,7 +38,7 @@ void main() {
 	if (mc_Entity.x == 101){
 		tintSaturation = 1.0;
 	}else{
-		tintSaturation = 1.5;
+		tintSaturation = 1.7;
 	}
 
 	if (mc_Entity.x != 100){
