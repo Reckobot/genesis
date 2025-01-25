@@ -1,19 +1,13 @@
 const float ambientOcclusionLevel = 0;
 
-uniform sampler2D colortex5;
-
 uniform vec3 shadowLightPosition;
 uniform mat4 gbufferModelViewInverse;
 uniform mat4 gbufferProjectionInverse;
 uniform mat4 gbufferModelView;
-uniform mat4 shadowModelView;
-uniform mat4 shadowProjection;
 uniform float far;
 uniform int isEyeInWater;
 uniform float playerMood;
 uniform float constantMood;
-
-uniform int frameCounter;
 
 uniform vec3 cameraPosition;
 uniform vec3 fogColor;
@@ -24,23 +18,6 @@ uniform float viewWidth;
 uniform float viewHeight;
 
 const vec3 alphaFogColor = vec3(0.75, 0.85, 1.0);
-
-float getFresnel(float f0, vec3 dir, vec3 norm){
-	float fresnel = pow(f0 + (1 - f0) * (1-dot(dir, norm)), 5);
-    return fresnel;
-}
-
-float getRoughness(vec2 coord, sampler2D depthtex, float depth){
-	float roughness = pow(1 - texture(colortex5, coord).r, 2);
-
-	if (depth != texture(depthtex, coord).r){
-		roughness = 0.0025;
-	}
-
-	roughness = (2/roughness)-2;
-
-    return roughness;
-}
 
 vec3 BSC(vec3 color, float brt, float sat, float con)
 {
@@ -58,13 +35,6 @@ vec3 BSC(vec3 color, float brt, float sat, float con)
 	vec3 conColor  = mix(AvgLumin, satColor, con);
 	
 	return conColor;
-}
-
-float IGN(vec2 coord, int frame, vec2 res)
-{
-    float x = float(coord.x * res.x) + 5.588238 * float(frame);
-    float y = float(coord.y * res.y) + 5.588238 * float(frame);
-    return mod(52.9829189 * mod(0.06711056*float(x) + 0.00583715*float(y), 1.0), 1.0);
 }
 
 float increment(float original, float numerator, float denominator){
