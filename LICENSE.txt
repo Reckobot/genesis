@@ -1,6 +1,6 @@
 All Rights Reserved
 
-Copyright © AlphaCraft 2025 Reckobot
+Copyright © Genesis 2025 Reckobot
 
 Do what you please with this shader as long as you DO NOT REDISTRIBUTE IT.
 If this shader finds itself on some website where it's not uploaded by ME, it WILL BE TAKEN DOWN.
