@@ -1,8 +1,8 @@
 option.ALPHACRAFT = AlphaCraft
 option.ALPHACRAFT.comment = Made by Recko! If you want to contact him, his username on discord is "reckobot".
-option.DISCLAIMER = Note
-option.DISCLAIMER.comment = As of right now, the shader CANNOT change the smooth lighting option, so you have to disable it yourself in video settings.
-value.DISCLAIMER.0 = HOVER FOR INFO
+option.DISCLAIMER = If you want blocky lighting
+option.DISCLAIMER.comment = Go in video options and disable "smooth lighting" when using the nostalgia preset. The shader doesn't have control over smooth lighting unfortunately.
+value.DISCLAIMER.0 = HOVER
 
 value.ALPHACRAFT.0 = v2.0
 
