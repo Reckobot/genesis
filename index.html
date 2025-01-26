@@ -15,6 +15,24 @@
 <style>
     @font-face { font-family: Minecraft; src: url('minecraft.ttf'); }
 
+    @keyframes splash {
+        0%{
+            width: 25vw;
+            left: 53vw;
+            top: 7.25vw;
+        }
+        25%{
+            width: 26vw;
+            left: 52.75vw;
+            top: 7vw;
+        }
+        100%{
+            width: 25vw;
+            left: 53vw;
+            top: 7.25vw;
+        }
+    }
+
     body {
         text-align: center;
         background-color: black;
@@ -78,6 +96,16 @@
 
 <h2>
     <img src="minecraft_title.png" style="width: 50vw;">
+
+    <img src="splash.png" style="height:auto;
+    animation-name: splash;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    position: absolute;
+    position-anchor:title;
+    left: 53vw;
+    top: 7.25vw;">
+
     <br></br>
     Available on <a href="https://modrinth.com/shader/genesis-shader">Modrinth</a> 
     and <a href="https://github.com/Reckobot/Genesis">GitHub</a>
