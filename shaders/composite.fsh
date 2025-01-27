@@ -107,7 +107,7 @@ void main() {
 	vec3 brdfspecular = ((fresnel * spec * geometric * NoL)/(4*NoL*NoV)) * vec3(1);
 	vec3 brdfdiffuse = color.rgb * ((NoL) * vec3(1));
 	vec3 brdf = (brdfspecular + brdfdiffuse);
-	brdf = clamp(brdf*shadow*2, 0.5, 1000.0);
+	brdf = clamp(brdf*shadow*2, 0.45, 1000.0);
 
 	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
 		color.rgb *= brdf;
