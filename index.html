@@ -33,17 +33,29 @@
         }
     }
 
+    @keyframes fadein {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 100;
+        }
+    }
+
     body {
         text-align: center;
-        background-color: black;
-        background-image: url('dirt.png');
-        background-attachment: fixed;
-        background-repeat: repeat;
-        background-size: 512px;
+        background-image: url('screenshots/genesis.webp');
+        background-color: rgba(0, 0, 0, 0.6);
+        background-size: cover;
+        background-blend-mode: darken;
         color: white;
         font-family: Minecraft;
         font-size: 16px;
         margin: 0% 0%;
+
+        animation-name: fadein;
+        animation-duration: 0.75s;
+        animation-iteration-count: 1;
     }
 
     a {
@@ -73,6 +85,7 @@
     }
 
     h4 {
+        position: absolute;
         bottom: 10px;
         font-size: 16px;
         opacity: 0.5;
@@ -81,7 +94,9 @@
     }
 
     h5 {
+        position: absolute;
         bottom: 10px;
+        right: 0px;
         font-size: 16px;
         opacity: 0.5;
         width: 35vw;
@@ -122,13 +137,6 @@
     the nostalgic look of Minecraft Alpha
     v1.1.2_01.
 </h3>
-
-<h6>
-    Left is Vanilla, Right is Genesis
-    <br></br>
-    <img src="screenshots/vanilla.webp" style="width: 40vw; padding: 5px 5px;">
-    <img src="screenshots/genesis.webp" style="width: 40vw; padding: 5px 5px;">
-</h6>
 
 <h4>
     Copyright © Genesis 2025 Reckobot. All Rights Reserved.

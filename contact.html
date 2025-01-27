@@ -15,6 +15,15 @@
 <style>
     @font-face { font-family: Minecraft; src: url('minecraft.ttf'); }
 
+    @keyframes fadein {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 100;
+        }
+    }
+
     body {
         text-align: center;
         background-color: black;
@@ -26,6 +35,9 @@
         font-family: Minecraft;
         font-size: 16px;
         margin: 0% 0%;
+        animation-name: fadein;
+        animation-duration: 0.75s;
+        animation-iteration-count: 1;
     }
 
     a {

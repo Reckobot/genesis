@@ -33,6 +33,15 @@
         }
     }
 
+    @keyframes fadein {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 100;
+        }
+    }
+
     body {
         text-align: center;
         background-image: url('screenshots/1.webp');
@@ -43,6 +52,9 @@
         font-family: Minecraft;
         font-size: 16px;
         margin: 0% 0%;
+        animation-name: fadein;
+        animation-duration: 0.75s;
+        animation-iteration-count: 1;
     }
 
     a {
@@ -72,6 +84,7 @@
     }
 
     h4 {
+        position: absolute;
         bottom: 10px;
         font-size: 16px;
         opacity: 0.5;
@@ -80,7 +93,9 @@
     }
 
     h5 {
+        position: absolute;
         bottom: 10px;
+        right: 0px;
         font-size: 16px;
         opacity: 0.5;
         width: 35vw;
