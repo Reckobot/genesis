@@ -2,9 +2,12 @@
 #include "/lib/common.glsl"
 #include "/lib/settings.glsl"
 
+uniform sampler2D normals;
+uniform sampler2D specular;
 uniform sampler2D lightmap;
 uniform sampler2D gtexture;
 in vec3 normal;
+in mat3 tbnmatrix;
 
 uniform float alphaTestRef = 0.1;
 
@@ -18,10 +21,17 @@ flat in int isEntityShadow;
 flat in int isLeaves;
 flat in int isGrass;
 
-/* RENDERTARGETS: 0,1,2 */
+/* RENDERTARGETS: 0,1,2,5 */
 layout(location = 0) out vec4 color;
 layout(location = 1) out vec4 light;
 layout(location = 2) out vec4 encodedNormal;
+layout(location = 3) out vec4 encodedSpecular;
+
+vec3 getnormalmap(vec2 texcoord){
+	vec3 normalmap = texture(normals, texcoord).rgb;
+	normalmap = normalmap * 2 - 1;
+	return tbnmatrix * normalmap;
+}
 
 void main() {
 	#if PRESET == 0
@@ -76,7 +86,10 @@ void main() {
 		discard;
 	}
 
-	encodedNormal = vec4(normal * 0.5 + 0.5, 1.0);
+	encodedNormal = vec4(getnormalmap(texcoord) * 1 + 0.5, 1.0);
+	encodedSpecular = texture(specular, texcoord);
+	
+	encodedSpecular.a = 1;
 	color.a = 1;
 
 	#ifdef INVISIBLE_GRASS

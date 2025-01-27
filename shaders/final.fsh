@@ -1,6 +1,7 @@
 #version 330 compatibility
 #include "/lib/common.glsl"
 #include "/lib/settings.glsl"
+#include "/lib/tonemap.glsl"
 
 uniform sampler2D depthtex0;
 uniform sampler2D colortex0;
@@ -55,6 +56,10 @@ void main() {
 		dist = length(viewPos) / far;
 	}
 
+	if (depth < 1){
+		color.rgb = aces(color.rgb);
+	}
+
 	#if RENDER_DISTANCE != 5
 		#if RENDER_DISTANCE == 0 || RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
 			if (doFog){
@@ -69,7 +74,6 @@ void main() {
 			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 		#endif
 	#endif
-
 	color.rgb = BSC(color.rgb, BRIGHTNESS, SATURATION, CONTRAST);
 
 	#ifdef WATERMARK

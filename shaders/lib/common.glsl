@@ -1,13 +1,18 @@
 const float ambientOcclusionLevel = 0;
 
+uniform sampler2D colortex5;
+
 uniform vec3 shadowLightPosition;
 uniform mat4 gbufferModelViewInverse;
 uniform mat4 gbufferProjectionInverse;
 uniform mat4 gbufferModelView;
+uniform mat4 shadowModelView;
+uniform mat4 shadowProjection;
 uniform float far;
 uniform int isEyeInWater;
 uniform float playerMood;
 uniform float constantMood;
+uniform int frameCounter;
 
 uniform vec3 cameraPosition;
 uniform vec3 fogColor;
@@ -46,12 +51,32 @@ vec3 projectAndDivide(mat4 projectionMatrix, vec3 position){
 	return homPos.xyz / homPos.w;
 }
 
+float getFresnel(float f0, vec3 dir, vec3 norm){
+	float fresnel = pow(f0 + (1 - f0) * (1-dot(dir, norm)), 5);
+    return fresnel;
+}
+
+float getRoughness(vec2 coord){
+	float roughness = pow(1 - texture(colortex5, coord).r, 2);
+
+	roughness = (2/roughness)-2;
+
+    return roughness;
+}
+
 float getLuminance(vec3 c){
 	return (0.2126 * c.r) + (0.7152 * c.g) + (0.0722 * c.b);
 }
 
 float fogify(float x, float w) {
 	return w / (x * x + w);
+}
+
+float IGN(vec2 coord, int frame, vec2 res)
+{
+    float x = float(coord.x * res.x) + 5.588238 * float(frame);
+    float y = float(coord.y * res.y) + 5.588238 * float(frame);
+    return mod(52.9829189 * mod(0.06711056*float(x) + 0.00583715*float(y), 1.0), 1.0);
 }
 
 vec3 calcSkyColor(vec3 pos) {
