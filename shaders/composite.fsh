@@ -104,13 +104,15 @@ void main() {
 
 	float NoV = dot(normal, viewDir);
 	float NoL = dot(normal, worldLightVector);
-	vec3 brdfspecular = ((fresnel * spec * geometric * NoL)/(4*NoL*NoV)) * vec3(1);
-	vec3 brdfdiffuse = color.rgb * ((NoL) * vec3(1));
+	vec3 brdfspecular = ((fresnel * spec * geometric * NoL)/(4*NoL*NoV)) * vec3(2);
+	vec3 brdfdiffuse = color.rgb * ((NoL) * vec3(2));
 	vec3 brdf = (brdfspecular + brdfdiffuse);
-	brdf = clamp(brdf*shadow*2, 0.45, 1000.0);
+	brdf = clamp(brdf*shadow*2, 0.5, 8.0);
 
 	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
 		color.rgb *= brdf;
+	}else if (texture(colortex3, texcoord) == vec4(1)){
+		color.rgb *= clamp(NoL, 0.5, 1.0);
 	}
 	color.rgb *= texture(colortex1, texcoord).rgb;
 }

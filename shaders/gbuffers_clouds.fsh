@@ -34,6 +34,7 @@ void main() {
 	if (color.a < alphaTestRef) {
 		discard;
 	}
+	color.rgb *= 2;
 
 	encodedNormal = vec4(normal * 0.5 + 0.5, 1.0);
 	cloudBuffer = vec4(1);
