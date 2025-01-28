@@ -10,8 +10,6 @@
     <meta property="og:url" content="https://reckobot.github.io/genesis"> 
     <meta property="og:type" content="website"> 
     <title>Gallery</title>
-
-    <link rel="preload" href="dirt.png" as="image">
 </head>
 
 <style>
@@ -44,11 +42,13 @@
         background-size: 512px;
         color: white;
         font-family: Minecraft;
-        font-size: 16px;
+        font-size: 20px;
         margin: 0% 0%;
         
         animation: rise 1s;
         position: relative;
+        left: calc((100vw - 100%) / 2);
+        overflow-x: hidden;
     }
 
     a {
@@ -63,8 +63,8 @@
     }
 
     h1 {
-        font-size: 16;
-        width: 90vw;
+        font-size: 16px;
+        width: 95vw;
         margin: 0 auto;
         animation: fadein 1s;
     }

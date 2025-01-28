@@ -9,9 +9,7 @@
     <meta property="og:image" content="icon.ico"> 
     <meta property="og:url" content="https://reckobot.github.io/genesis"> 
     <meta property="og:type" content="website"> 
-    <title>Home</title> 
-
-    <link rel="preload" href="screenshots/genesis.webp" as="image">
+    <title>Home</title>
 </head>
 
 <style>
@@ -19,19 +17,13 @@
 
     @keyframes splash {
         0%{
-            width: 26vw;
-            left: 53vw;
-            top: 3.25vw;
+            width: calc(26vw + clamp(0vw, 10vh, 100vw));
         }
         25%{
-            width: 27vw;
-            left: 52.5vw;
-            top: 3.0vw;
+            width: calc(27vw + clamp(0vw, 10vh, 100vw));
         }
         100%{
-            width: 26vw;
-            left: 53vw;
-            top: 3.25vw;
+            width: calc(26vw + clamp(0vw, 10vh, 100vw));
         }
     }
 
@@ -71,7 +63,7 @@
         background-repeat: no-repeat;
         color: white;
         font-family: Minecraft;
-        font-size: 16px;
+        font-size: 20px;
         margin: 0% 0%;
 
         animation: rise 1s;
@@ -91,7 +83,7 @@
     }
 
     h1 {
-        font-size: 16;
+        font-size: 16px;
         width: 100vw;
         margin: 0 auto;
         animation: fadein 1s;
@@ -103,7 +95,7 @@
     }
 
     h3 {
-        width: 50vw;
+        width: 75vw;
         margin: 0 auto;
         animation: fadein 1s;
     }
@@ -111,7 +103,7 @@
     h4 {
         position: fixed;
         bottom: 10px;
-        font-size: 16px;
+        font-size: 12px;
         opacity: 0.5;
         width: 40vw;
         margin: 0 auto;
@@ -122,7 +114,7 @@
         position: fixed;
         bottom: 10px;
         right: 0px;
-        font-size: 16px;
+        font-size: 12px;
         opacity: 0.5;
         width: 35vw;
         margin: 0 auto;
@@ -136,7 +128,7 @@
 </h1>
 
 <h2>
-    <img src="minecraft_title.png" style="width: 50vw;">
+    <img src="minecraft_title.png" style="width: clamp(0vw, 100vh, 100vw);">
 
     <img src="splash.png" style="height:auto;
     animation-name: splash;
@@ -144,8 +136,8 @@
     animation-iteration-count: infinite;
     position: absolute;
     position-anchor:title;
-    left: 53vw;
-    top: 3.25vw;">
+    left: 50vw;
+    top: 5vh;">
 
     <br></br>
     Available on <a href="https://modrinth.com/shader/genesis-shader">Modrinth</a> 
