@@ -1,3 +1,5 @@
+<link rel="preload" href="dirt.png">
+
 <head>
     <title>Genesis</title>
     <link rel="icon" type="image/x-icon" href="icon.ico">
@@ -20,7 +22,16 @@
             opacity: 0;
         }
         100%{
-            opacity: 100;
+            opacity: 1;
+        }
+    }
+
+    @keyframes rise {
+        0%{
+            top: 25vh;
+        }
+        100%{
+            top: 0vh;
         }
     }
 
@@ -35,9 +46,10 @@
         font-family: Minecraft;
         font-size: 16px;
         margin: 0% 0%;
-        animation-name: fadein;
-        animation-duration: 1s;
-        animation-iteration-count: 1;
+
+        animation: rise 1s;
+        position: relative;
+        overflow-y:hidden;
     }
 
     a {
@@ -55,11 +67,13 @@
         font-size: 24px;
         width: 50vw;
         margin: 0 auto;
+        animation: fadein 1s;
     }
 
     h2 {
         width:50%;
         margin: 0 auto;
+        animation: fadein 1s;
     }
 </style>
 
