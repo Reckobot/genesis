@@ -47,7 +47,7 @@ vec3 projectAndDivide(mat4 projectionMatrix, vec3 position){
 }
 
 float getLuminance(vec3 c){
-	return (0.2126 * c.r) + (0.7152 * c.g) + (0.0722 * c.b);
+	return dot(vec3(0.2126, 0.7152, 0.0722), c);
 }
 
 float fogify(float x, float w) {
@@ -67,20 +67,4 @@ vec3 screenToView(vec3 screenPos) {
 
 
 const int RGBA16F = 0;
-const int RGBA32F = 0;
 const int colortex0Format = RGBA16F;
-const int colortex1Format = RGBA16F;
-const int colortex2Format = RGBA16F;
-const int colortex3Format = RGBA16F;
-const int colortex4Format = RGBA16F;
-const int colortex5Format = RGBA16F;
-const int colortex6Format = RGBA16F;
-const int colortex7Format = RGBA16F;
-const int colortex8Format = RGBA16F;
-const int colortex9Format = RGBA16F;
-const int colortex10Format = RGBA16F;
-const int colortex11Format = RGBA16F;
-const int colortex12Format = RGBA16F;
-const int colortex13Format = RGBA16F;
-const int colortex14Format = RGBA16F;
-const int colortex15Format = RGBA16F;
