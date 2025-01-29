@@ -51,9 +51,9 @@ void main() {
 
 	float dist = length(viewPos) / (64/renderdist*fogdensity);
 
-	if (RENDER_DISTANCE == 0){
+	#if RENDER_DISTANCE == 0
 		dist = length(viewPos) / far;
-	}
+	#endif
 
 	#if RENDER_DISTANCE != 5
 		#if RENDER_DISTANCE == 0 || RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
