@@ -1,8 +1,8 @@
 <script>
     function moveBackground(e) {
         var element = document.getElementById('backdrop');
-        element.style.left = ((e.clientX*0.1) - (window.innerWidth/2)) + 'px';
-        element.style.top = ((e.clientY*0.1) - (window.innerHeight/2)) + 'px';
+        element.style.left = ((-e.clientX*0.1) - (window.innerWidth/2)) + 'px';
+        element.style.top = ((-e.clientY*0.1) - (window.innerHeight/2)) + 'px';
         if (element.style.opacity == 0){
             element.style.opacity = 1;
         }
