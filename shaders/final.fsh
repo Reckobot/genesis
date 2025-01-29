@@ -52,9 +52,9 @@ void main() {
 
 	float dist = length(viewPos) / (64/renderdist*fogdensity);
 
-	if (RENDER_DISTANCE == 0){
+	#if RENDER_DISTANCE == 0
 		dist = length(viewPos) / far;
-	}
+	#endif
 
 	if (depth < 1){
 		color.rgb = aces(color.rgb);
