@@ -3,6 +3,9 @@
         var element = document.getElementById('backdrop');
         element.style.left = ((e.clientX*0.1) - (window.innerWidth/2)) + 'px';
         element.style.top = ((e.clientY*0.1) - (window.innerHeight/2)) + 'px';
+        if (element.style.opacity == 0){
+            element.style.opacity = 1;
+        }
     }
 </script>
 
@@ -12,6 +15,8 @@ width: auto;
 height: 200vh;
 left:-50vw;
 top:-50vh;
+opacity: 0;
+transition: opacity 0.5s;
 z-index: -100;
 overflow-x: hidden;
 overflow-y: hidden;"></img>
