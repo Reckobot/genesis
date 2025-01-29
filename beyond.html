@@ -1,5 +1,23 @@
+<script>
+    function moveBackground(e) {
+        var element = document.getElementById('backdrop');
+        element.style.left = ((e.clientX*0.1) - (window.innerWidth/2)) + 'px';
+        element.style.top = ((e.clientY*0.1) - (window.innerHeight/2)) + 'px';
+    }
+</script>
+
+<img id="backdrop" src = 'screenshots/beyond.webp' style="
+position: absolute;
+width: auto;
+height: 200vh;
+left:-50vw;
+top:-50vh;
+z-index: -100;
+overflow-x: hidden;
+overflow-y: hidden;"></img>
+
 <head>
-    <title>Genesis Beyond</title>
+    <title>Genesis</title>
     <link rel="icon" type="image/x-icon" href="https://github.com/Reckobot/genesis/blob/website/icon.png?raw=true">
 
     <meta charset="UTF-8"> 
@@ -60,7 +78,6 @@
     body {
         text-align: center;
         background-color: black;
-        background-image: url('screenshots/beyond.webp');
         background-size: cover;
         background-attachment: fixed;
         background-repeat: no-repeat;
@@ -69,8 +86,11 @@
         font-size: 20px;
         margin: 0% 0%;
 
+        text-shadow: 2px 2px #000000;
+
         animation: rise 1s;
-        position: relative;
+        position: fixed;
+        overflow-x:hidden;
         overflow-y:hidden;
     }
 
@@ -125,6 +145,13 @@
     }
 </style>
 
+<div onmousemove = 'moveBackground(event)' style="
+position: absolute;
+width: 100vw;
+height: 100vh;
+left: 0vw;
+top: 0vh;
+z-index: 100;">
 
 <h1>
     <a href="https://reckobot.github.io/genesis">Genesis</a> | <a href="https://reckobot.github.io/genesis/beyond">Beyond</a> | <a href="https://reckobot.github.io/genesis/gallery">Gallery</a> | <a href="https://reckobot.github.io/genesis/contact">Contact</a>
@@ -147,9 +174,9 @@
 </h2>
 
 <h3>
-    A Minecraft shader that replicates
-    the visuals of old Minecraft versions AT ITS BASE,
-    but goes way BEYOND what those versions were capable of.
+    It's Genesis at its base, but with proper lighting. There's a lot of potential in this shader, so keep your eyes peeled! :)
+    <br></br>
+    (The map in the background is made by the lovely churchner420, and it's publicly available for anyone who wants to try it <a href = "https://www.planetminecraft.com/project/best-hogwarts-made-in-minecraft-3645628/">here</a>)
 </h3>
 
 <h4>
@@ -159,3 +186,5 @@
 <h5>
     Not Associated With Nor Endorsed By Mojang.
 </h5>
+
+</div>
