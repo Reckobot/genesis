@@ -26,18 +26,13 @@ void main() {
 
 	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
 		if (depth != texture(depthtex1, texcoord).r){
-			if ((encodedNormal.r >= 0.5)){
-				color.rgb *= 0.75;
-			}
-			if ((encodedNormal.g < 0.5)){
-				color.rgb *= 0.75;
-			}
-			if ((encodedNormal.r >= 0.25)&&(encodedNormal.b >= 0.25)&&(encodedNormal.g < 0.25)){
-				color.rgb *= 0.75;
-			}
-			if ((encodedNormal.r < 0.25)&&(encodedNormal.b >= 0.25)&&(encodedNormal.g >= 0.25)){
-				color.rgb *= 0.75;
-			}
+			float mult = 1.0;
+			mult *= encodedNormal.r;
+			mult *= 1-encodedNormal.r;
+			mult *= dot(encodedNormal.rgb, vec3(0,1,0));
+
+			mult = clamp(mult*4+0.25, 0.5, 1.0);
+			color.rgb *= mult;
 		}
 	}
 	color.rgb *= texture(colortex1, texcoord).rgb;
