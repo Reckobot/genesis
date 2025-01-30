@@ -3,7 +3,7 @@
 
 #define RENDER_DISTANCE 0 //[0 1 2 3 4 5]
 #define PRESET 0 //[0 1]
-#define FAST_LEAVES
+//#define FAST_LEAVES
 #define INVISIBLE_GRASS
 #define CLOUD_OFFSET -75 //[-200 -175 -150 -125 -100 -75 -50 -25 0 25 50 75 100 125 150 175 200]
 #define WATERMARK

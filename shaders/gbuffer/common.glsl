@@ -30,7 +30,7 @@ void main() {
 			vec4 tint = vec4(tintcolor, glcolor.a);
 			tint.rgb = BSC(tint.rgb, 1.7, (1-getLuminance(texture(gtexture, texcoord).rgb))*2.3*tintSaturation, 1.0);
 			color = texture(gtexture, texcoord) * tint;
-			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.75);
+			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.8);
 			color.rgb = BSC(color.rgb, FOLIAGE_BRIGHTNESS, FOLIAGE_SATURATION, FOLIAGE_CONTRAST);
 		}else{
 			color = texture(gtexture, texcoord) * glcolor;
@@ -63,7 +63,7 @@ void main() {
 			}
 		}else{
 			if (color.a < alphaTestRef) {
-				color.rgb *= 0.25;
+				color.rgb *= 0.6;
 			}
 		}
 	#else

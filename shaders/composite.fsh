@@ -26,7 +26,18 @@ void main() {
 
 	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
 		if (depth != texture(depthtex1, texcoord).r){
-			color.rgb *= clamp(getLuminance(normal)+0.6, 0.6, 1.0);
+			if ((encodedNormal.r >= 0.5)){
+				color.rgb *= 0.75;
+			}
+			if ((encodedNormal.g < 0.5)){
+				color.rgb *= 0.75;
+			}
+			if ((encodedNormal.r >= 0.25)&&(encodedNormal.b >= 0.25)&&(encodedNormal.g < 0.25)){
+				color.rgb *= 0.75;
+			}
+			if ((encodedNormal.r < 0.25)&&(encodedNormal.b >= 0.25)&&(encodedNormal.g >= 0.25)){
+				color.rgb *= 0.75;
+			}
 		}
 	}
 	color.rgb *= texture(colortex1, texcoord).rgb;
