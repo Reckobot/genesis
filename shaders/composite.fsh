@@ -25,16 +25,32 @@ in vec2 texcoord;
 layout(location = 0) out vec4 color;
 
 vec3 getShadow(vec3 shadowScreenPos){
-	float transparentShadow = step(shadowScreenPos.z, texture(shadowtex0, shadowScreenPos.xy).r);
-	if(transparentShadow == 1.0){
-		return vec3(1.0);
-	}
-	float opaqueShadow = step(shadowScreenPos.z, texture(shadowtex1, shadowScreenPos.xy).r);
-	if(opaqueShadow == 0.0){
-		return vec3(0.0);
-	}
-	vec4 shadowColor = texture(shadowcolor0, shadowScreenPos.xy);
-	return shadowColor.rgb * (1.0 - shadowColor.a);
+	float shadow = step(shadowScreenPos.z, texture(shadowtex0, shadowScreenPos.xy).r);
+	shadow += distance(shadowScreenPos.z, texture(shadowtex0, shadowScreenPos.xy).r)*50;
+	shadow = clamp(shadow, 0.0, 1.0);
+	return vec3(shadow);
+}
+
+vec3 getSoftShadow(vec4 shadowClipPos, float bias){
+	vec3 shadowAccum = vec3(0.0);
+	int samples = 0;
+
+	float radius = 2;
+
+	for(float x = -radius; x <= radius; x++){
+		for (float y = -radius; y <= radius; y++){
+			vec2 offset = vec2(x, y) / shadowMapResolution;
+			vec4 offsetShadowClipPos = shadowClipPos + vec4(offset, 0.0, 0.0);
+      		offsetShadowClipPos.z -= bias;
+      		offsetShadowClipPos.xyz = distortShadowClipPos(offsetShadowClipPos.xyz);
+      		vec3 shadowNDCPos = offsetShadowClipPos.xyz / offsetShadowClipPos.w;
+      		vec3 shadowScreenPos = shadowNDCPos * 0.5 + 0.5;
+      		shadowAccum += getShadow(shadowScreenPos);
+      		samples++;
+    	}
+  	}
+
+  	return shadowAccum / (samples);
 }
 
 void main() {
@@ -58,31 +74,16 @@ void main() {
 	ftplPos -= cameraPosition;
 	vec3 shadowviewPos = (shadowModelView * vec4(ftplPos, 1)).xyz;
 	vec4 shadowclipPos = shadowProjection * vec4(shadowviewPos, 1);
-	shadowclipPos.z -= 0.005;
+	shadowclipPos.z -= 0.0025;
+	vec4 shadowcPos = shadowclipPos;
+	shadowclipPos.xyz = distortShadowClipPos(shadowclipPos.xyz);
 	vec3 shadowndcPos = shadowclipPos.rgb / shadowclipPos.w;
 	vec3 shadowscreenPos = shadowndcPos * 0.5 + 0.5;
-
-	vec3 shadow = vec3(0);
-  	int samples = 0;
-
-	float radius = 0.25;
-	for(float x = -radius; x <= radius; x += 0.25){
-	for (float y = -radius; y <= radius; y += 0.25){
-		vec2 offset = vec2(x, y) / shadowMapResolution;
-		vec4 offsetShadowClipPos = shadowclipPos + vec4(offset, 0.0, 0.0); // add offset
-		offsetShadowClipPos.xyz = distortShadowClipPos(offsetShadowClipPos.xyz); // apply distortion
-		vec3 shadowNDCPos = offsetShadowClipPos.xyz / offsetShadowClipPos.w; // convert to NDC space
-		vec3 shadowScreenPos = shadowNDCPos * 0.5 + 0.5; // convert to screen space
-		shadow += getShadow(shadowScreenPos); // take shadow sample
-		samples++;
-	}
-	}
-
-	shadow /= samples;
+	vec3 shadow = getSoftShadow(shadowcPos, clamp(exp(length(viewPos)/16)*shadowMapResolution*0.00000005, 0.001, 1.0));
 
 	shadow *= dot(normal, worldLightVector)*2;
 
-	shadow = clamp(shadow, clamp(exp(radius), 0.25, 0.5), 1.0);
+	shadow = clamp(shadow, 0.5, 1.0);
 
 	color.rgb *= texture(colortex1, texcoord).rgb;
 	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){

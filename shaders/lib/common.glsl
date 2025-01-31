@@ -9,6 +9,8 @@ uniform int isEyeInWater;
 uniform float playerMood;
 uniform float constantMood;
 
+uniform int frameCounter;
+
 uniform vec3 cameraPosition;
 uniform vec3 fogColor;
 uniform vec3 skyColor;
@@ -39,6 +41,13 @@ vec3 BSC(vec3 color, float brt, float sat, float con)
 
 float increment(float original, float numerator, float denominator){
     return round(original * denominator / numerator) * numerator / denominator;
+}
+
+float IGN(vec2 coord, int frame, vec2 res)
+{
+    float x = float(coord.x * res.x) + 5.588238 * float(frame);
+    float y = float(coord.y * res.y) + 5.588238 * float(frame);
+    return mod(52.9829189 * mod(0.06711056*float(x) + 0.00583715*float(y), 1.0), 1.0);
 }
 
 vec3 projectAndDivide(mat4 projectionMatrix, vec3 position){
