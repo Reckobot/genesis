@@ -26,8 +26,6 @@ layout(location = 0) out vec4 color;
 
 vec3 getShadow(vec3 shadowScreenPos){
 	float shadow = step(shadowScreenPos.z, texture(shadowtex0, shadowScreenPos.xy).r);
-	shadow += distance(shadowScreenPos.z, texture(shadowtex0, shadowScreenPos.xy).r)*50;
-	shadow = clamp(shadow, 0.0, 1.0);
 	return vec3(shadow);
 }
 
