@@ -35,9 +35,17 @@ vec3 getSoftShadow(vec4 shadowClipPos, float bias){
 
 	float radius = 2;
 
+	float noise = IGN(texcoord, frameCounter, vec2(viewWidth, viewHeight));
+
+	float theta = noise * radians(360.0);
+	float cosTheta = cos(theta);
+	float sinTheta = sin(theta);
+
+	mat2 rotation = mat2(cosTheta, -sinTheta, sinTheta, cosTheta);
+
 	for(float x = -radius; x <= radius; x++){
 		for (float y = -radius; y <= radius; y++){
-			vec2 offset = vec2(x, y) / shadowMapResolution;
+			vec2 offset = rotation * vec2(x, y) / shadowMapResolution;
 			vec4 offsetShadowClipPos = shadowClipPos + vec4(offset, 0.0, 0.0);
       		offsetShadowClipPos.z -= bias;
       		offsetShadowClipPos.xyz = distortShadowClipPos(offsetShadowClipPos.xyz);
@@ -65,14 +73,9 @@ void main() {
 	vec3 NDCPos = vec3(texcoord.xy, depth) * 2.0 - 1.0;
 	vec3 viewPos = projectAndDivide(gbufferProjectionInverse, NDCPos);
 	vec3 ftplPos = (gbufferModelViewInverse * vec4(viewPos, 1)).xyz;
-	ftplPos += cameraPosition;
-	ftplPos *= 16;
-	ftplPos = vec3(ivec3(ftplPos));
-	ftplPos /= 16;
-	ftplPos -= cameraPosition;
 	vec3 shadowviewPos = (shadowModelView * vec4(ftplPos, 1)).xyz;
 	vec4 shadowclipPos = shadowProjection * vec4(shadowviewPos, 1);
-	shadowclipPos.z -= 0.0025;
+	shadowclipPos.z -= 0.001;
 	vec4 shadowcPos = shadowclipPos;
 	shadowclipPos.xyz = distortShadowClipPos(shadowclipPos.xyz);
 	vec3 shadowndcPos = shadowclipPos.rgb / shadowclipPos.w;
