@@ -1,26 +1,8 @@
-<img id="backdrop" src = 'screenshots/beyond.webp' style="
-position: absolute;
-width: auto;
-height: 200vh;
-left:-50vw;
-top:-50vh;
-opacity: 0;
-transition: opacity 0.5s;
-z-index: -100;
-overflow-x: hidden;
-overflow-y: hidden;
-filter: blur(5px);"></img>
-
 <script>
-    if (window.innerWidth < window.innerHeight){
-        var element = document.getElementById('backdrop');
-        element.style.opacity = 1;
-    }
-
     function moveBackground(e) {
-        var element = document.getElementById('backdrop');
-        element.style.left = ((-e.clientX*0.1) - (window.innerWidth/2)) + 'px';
-        element.style.top = ((-e.clientY*0.1) - (window.innerHeight/2)) + 'px';
+        var element = document.body;
+        element.style.backgroundPositionX = ((-e.clientX*0.1)) + 'px';
+        element.style.backgroundPositionY = ((-e.clientY*0.1)) + 'px';
         if (element.style.opacity == 0){
             element.style.opacity = 1;
         }
@@ -89,9 +71,8 @@ filter: blur(5px);"></img>
     body {
         text-align: center;
         background-color: black;
-        background-size: cover;
-        background-attachment: fixed;
-        background-repeat: no-repeat;
+        background-image: url(dirt.png);
+        background-repeat: repeat;
         color: white;
         font-family: Minecraft;
         font-size: 20px;
@@ -100,9 +81,9 @@ filter: blur(5px);"></img>
         text-shadow: 2px 2px #000000;
 
         animation: rise 1s;
-        position: fixed;
+        position: relative;
         overflow-x:hidden;
-        overflow-y:hidden;
+        height: 200vh;
     }
 
     a {
@@ -119,7 +100,7 @@ filter: blur(5px);"></img>
     h1 {
         font-size: 16px;
         width: 100vw;
-        margin: 0 auto;
+        margin: 10px auto;
         animation: fadein 1s;
     }
 
@@ -154,12 +135,19 @@ filter: blur(5px);"></img>
         margin: 0 auto;
         animation: translucentfadein 1s;
     }
+
+    h6 {
+        position: absolute;
+        top: 100vh;
+        left: 12.5vw;
+        font-size: 16px;
+    }
 </style>
 
 <div onmousemove = 'moveBackground(event)' style="
 position: absolute;
 width: 100vw;
-height: 100vh;
+height: 200vh;
 left: 0vw;
 top: 0vh;
 z-index: 100;">
@@ -186,9 +174,13 @@ z-index: 100;">
 
 <h3>
     It's Genesis at its base, but with proper lighting. There's a lot of potential in this shader, so keep your eyes peeled! :)
-    <br></br>
-    (The map in the background is made by the lovely churchner420, and it's publicly available for anyone who wants to try it <a href = "https://www.planetminecraft.com/project/best-hogwarts-made-in-minecraft-3645628/">here</a>)
 </h3>
+
+<h6>
+    (Map is available <a href = "https://www.planetminecraft.com/project/best-hogwarts-made-in-minecraft-3645628/">here</a>)
+    <br></br>
+    <img src="screenshots/beyond.webp" style="width: 75vw;">
+</h6>
 
 <h4>
     Copyright © Genesis 2025 Reckobot. All Rights Reserved.
