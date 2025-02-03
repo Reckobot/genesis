@@ -29,7 +29,7 @@ void main() {
 		mult *= 1-encodedNormal.r;
 		mult *= dot(encodedNormal.rgb, vec3(0,1,0));
 
-		mult = clamp(mult*4+0.25, 0.5, 1.0);
+		mult = clamp(mult*4+0.25, 0.55, 1.0);
 		color.rgb *= mult;
 	}
 	color.rgb *= texture(colortex1, texcoord).rgb;
