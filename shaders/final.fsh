@@ -24,7 +24,7 @@ void main() {
 	vec3 pos = screenToView(vec3(texcoord.xy, depth));
 
 	vec3 fogcolor = calcSkyColor(normalize(pos));
-	float fogdensity = 0.95;
+	float fogdensity = 1.0;
 	bool doFog = false;
 
 	if ((depth < 1)){
@@ -44,17 +44,20 @@ void main() {
 	float renderdist;
 
 	#if RENDER_DISTANCE == 1
-		renderdist = 0.2;
-		fogdensity = 0.85;
+		renderdist = 0.1;
 	#elif RENDER_DISTANCE == 2
-		renderdist = 0.4;
+		renderdist = 0.175;
 	#elif RENDER_DISTANCE == 3
-		renderdist = 1.5;
+		renderdist = 0.4;
 	#elif RENDER_DISTANCE == 4
-		renderdist = 2.5;
+		renderdist = 0.6;
 	#endif
 
-	float dist = length(viewPos) / (64/renderdist*fogdensity);
+	if (texture(colortex3, texcoord) == vec4(1)){
+		renderdist *= 0.5;
+	}
+
+	float dist = (length(viewPos) / (64/fogdensity))*4*renderdist;
 
 	#if RENDER_DISTANCE == 0
 		dist = length(viewPos) / far;
