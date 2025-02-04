@@ -1,13 +1,13 @@
 #define ALPHACRAFT 0 //[0]
 #define DISCLAIMER 0 //[0]
 
-#define RENDER_DISTANCE 1 //[0 1 2 3 4 5]
+#define RENDER_DISTANCE 2 //[0 1 2 3 4 5]
 #define PRESET 0 //[0 1]
 //#define FAST_LEAVES
 #define INVISIBLE_GRASS
 #define CLOUD_OFFSET -75 //[-200 -175 -150 -125 -100 -75 -50 -25 0 25 50 75 100 125 150 175 200]
 #define WATERMARK
-#define WATERMARK_SCALE 5 //[1 2 3 4 5 6 7 8 9 10]
+#define WATERMARK_SCALE 6 //[1 2 3 4 5 6 7 8 9 10]
 
 #define BRIGHTNESS 1.0 //[0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0]
 #define SATURATION 1.0 //[0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0]

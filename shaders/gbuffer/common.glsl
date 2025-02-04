@@ -31,7 +31,7 @@ void main() {
 			if (bool(isLeaves)){
 				tint.rgb = BSC(tint.rgb, 1.7, (1-getLuminance(texture(gtexture, texcoord).rgb))*2.1*tintSaturation, 1.0);
 			}else{
-				tint.rgb = BSC(tint.rgb, 1.4, 0.9, 1.75);
+				tint.rgb = BSC(tint.rgb, 1.5, 0.9, 1.75);
 			}
 			color = texture(gtexture, texcoord) * tint;
 			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.8);
