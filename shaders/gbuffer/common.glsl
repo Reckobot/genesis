@@ -80,7 +80,7 @@ void main() {
 	}
 
 	encodedNormal = vec4(normal * 0.5 + 0.5, 1.0);
-	color.a = 1;
+	encodedNormal.a = 1;
 
 	#ifdef INVISIBLE_GRASS
 		if (bool(isGrass)){
