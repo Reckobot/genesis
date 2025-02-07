@@ -31,10 +31,6 @@ void main() {
 		color.rgb = BSC(color.rgb, 1.0, 1.1, 1.0);
 	}
 
-	if ((depth < 1)){
-		doFog = true;
-	}
-
 	float renderdist;
 
 	#if RENDER_DISTANCE == 1
@@ -57,6 +53,14 @@ void main() {
 	if (texture(colortex3, texcoord) == vec4(1)){
 		renderdist *= 0.5;
 	}
+
+	#ifndef DISTANTHORIZONS
+	if ((depth < 1)){
+		doFog = true;
+	}
+	#else
+		doFog = false;
+	#endif
 
 	float dist = (length(viewPos) / (64/fogdensity))*4*renderdist;
 
