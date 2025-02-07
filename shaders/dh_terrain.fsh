@@ -27,7 +27,7 @@ void main() {
 	}
 
 	#if PRESET == 0
-		if (((((glcolor.r + glcolor.b)/2) - glcolor.g) <= -0.05)){
+		if (((((glcolor.r + glcolor.b)/2) - glcolor.g) <= -0.1)){
 			vec3 tintcolor = vec3(0.4, 0.8, 0.2);
 			vec4 tint = vec4(tintcolor, glcolor.a);
 			if (glcolor.b > 0.1){
@@ -40,7 +40,6 @@ void main() {
 			color.rgb = BSC(color.rgb, FOLIAGE_BRIGHTNESS, FOLIAGE_SATURATION, FOLIAGE_CONTRAST);
 		}else{
 			color = texture(gtexture, texcoord) * glcolor;
-			color.rgb *= 1.75;
 		}
 	#else
 		color = texture(gtexture, texcoord) * glcolor;

@@ -26,7 +26,7 @@ void main() {
 		discard;
 	}
 	if (glcolor.b > 0.5){
-		vec3 tintcolor = vec3(0.15,0.15,1)*0.85;
+		vec3 tintcolor = vec3(0.15,0.15,1);
 		vec4 tint = vec4(tintcolor, glcolor.a);
 		color = texture(gtexture, texcoord) * tint;
 	}else{
