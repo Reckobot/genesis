@@ -25,8 +25,8 @@ void main() {
 	if (depth < 1){
 		discard;
 	}
-	if (glcolor.b > 0.5){
-		vec3 tintcolor = vec3(0.15,0.15,1);
+	if (glcolor.b > 0.25){
+		vec3 tintcolor = vec3(0.2,0.2,1)*0.95;
 		vec4 tint = vec4(tintcolor, glcolor.a);
 		color = texture(gtexture, texcoord) * tint;
 	}else{
@@ -51,4 +51,6 @@ void main() {
 
 	encodedNormal = vec4(normal * 0.5 + 0.5, 1.0);
 	encodedNormal.a = 1;
+
+	color.rgb *= clamp(pow(light.rgb, vec3(2)), 0.0, 1.0);
 }

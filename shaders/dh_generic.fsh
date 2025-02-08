@@ -56,4 +56,5 @@ void main() {
 	color.rgb *= mult;
 	color.rgb *= 1.15;
 	color.rgb = clamp(color.rgb, 0.75, 0.95);
+	color.rgb = BSC(color.rgb, getLuminance(glcolor.rgb), 1.0, 1.0);
 }

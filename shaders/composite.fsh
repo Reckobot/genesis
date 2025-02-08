@@ -34,6 +34,6 @@ void main() {
 			mult = clamp(mult*4+0.25, 0.55, 1.0);
 			color.rgb *= mult;
 		}
+		color.rgb *= texture(colortex1, texcoord).rgb;
 	}
-	color.rgb *= texture(colortex1, texcoord).rgb;
 }

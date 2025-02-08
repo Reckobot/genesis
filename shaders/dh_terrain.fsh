@@ -27,13 +27,14 @@ void main() {
 	}
 
 	#if PRESET == 0
-		if (((((glcolor.r + glcolor.b)/2) - glcolor.g) <= -0.1)){
+		vec3 compare = BSC(glcolor.rgb, 4.0, 1.0, 1.0);
+		if ((((compare.r + compare.b)/2)/compare.g) < 0.8){
 			vec3 tintcolor = vec3(0.4, 0.8, 0.2);
 			vec4 tint = vec4(tintcolor, glcolor.a);
-			if (glcolor.b > 0.1){
+			if (getLuminance(compare.rgb) > 1.25){
 				tint.rgb = BSC(tint.rgb, 0.9, 0.675, 1.5);
 			}else{
-				tint.rgb = BSC(tint.rgb, 1.0, 0.95, 1.5);
+				tint.rgb = BSC(tint.rgb, 1.0, 0.925, 1.5);
 			}
 			color = texture(gtexture, texcoord) * tint;
 			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.8);
@@ -72,4 +73,6 @@ void main() {
 
 	mult = clamp(mult*3+0.25, 0.5, 1.0);
 	color.rgb *= mult;
+	
+	color.rgb *= clamp(pow(light.rgb, vec3(2)), 0.0, 1.0);
 }

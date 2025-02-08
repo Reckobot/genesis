@@ -43,7 +43,6 @@ void main() {
 	if (color.a < alphaTestRef) {
 		discard;
 	}
-	color *= light;
 
 	encodedNormal = vec4(normal * 0.5 + 0.5, 1.0);
 }
