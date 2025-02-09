@@ -5,6 +5,7 @@ out vec2 lmcoord;
 out vec2 texcoord;
 out vec4 glcolor;
 out vec3 normal;
+out vec3 viewPos;
 
 flat out int isEntityShadow;
 
@@ -24,4 +25,9 @@ void main() {
 	glcolor = gl_Color;
 	normal = gl_NormalMatrix * gl_Normal;
 	normal = mat3(gbufferModelViewInverse) * normal;
+
+    vec3 vPos = gl_Vertex.xyz;
+    vec3 cameraOffset = fract(cameraPosition);
+    vPos = floor(vPos + cameraOffset + 0.5) - cameraOffset;
+    viewPos = (mat3(gl_ModelViewMatrix) * vPos);
 }

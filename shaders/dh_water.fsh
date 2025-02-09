@@ -2,6 +2,11 @@
 #include "/lib/common.glsl"
 #include "/lib/settings.glsl"
 
+uniform sampler2D dhDepthTex0;
+uniform mat4 dhProjectionInverse;
+uniform float dhFarPlane;
+in vec3 viewPos;
+
 uniform sampler2D depthtex0;
 uniform sampler2D lightmap;
 uniform sampler2D gtexture;
@@ -53,4 +58,37 @@ void main() {
 	encodedNormal.a = 1;
 
 	color.rgb *= clamp(pow(light.rgb, vec3(2)), 0.0, 1.0);
+
+	float fogdensity = 0.8;
+	float renderdist = 0.1;
+	bool doFog = true;
+	vec3 fogcolor = calcSkyColor(normalize(viewPos));
+
+	#if RENDER_DISTANCE == 1
+		renderdist = 0.1;
+	#elif RENDER_DISTANCE == 2
+		renderdist = 0.2;
+	#elif RENDER_DISTANCE == 3
+		renderdist = 0.3;
+	#elif RENDER_DISTANCE == 4
+		renderdist = 0.4;
+	#endif
+
+	renderdist /= RENDER_DISTANCE_MULT;
+	float dist = (length(viewPos) / (64/fogdensity))/4*renderdist;
+
+	#if RENDER_DISTANCE != 5
+		#if RENDER_DISTANCE == 0 || RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
+			if (doFog){
+				float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+				color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
+			}
+		#else
+			fogcolor = alphaFogColor;
+			fogcolor = BSC(fogcolor, getLuminance(skyColor)*1.5, 1.0, 1.0);
+			fogdensity = 0.65;
+			float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
+		#endif
+	#endif
 }

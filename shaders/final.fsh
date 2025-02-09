@@ -54,13 +54,15 @@ void main() {
 		renderdist *= 0.5;
 	}
 
-	#ifndef DISTANTHORIZONS
+	#ifndef DISTANT_HORIZONS
 	if ((depth < 1)){
 		doFog = true;
 	}
 	#else
 		doFog = false;
 	#endif
+
+	renderdist /= RENDER_DISTANCE_MULT;
 
 	float dist = (length(viewPos) / (64/fogdensity))*4*renderdist;
 

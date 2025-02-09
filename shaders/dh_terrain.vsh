@@ -1,12 +1,18 @@
 #version 330 compatibility
 #include "/lib/common.glsl"
 
+uniform sampler2D dhDepthTex0;
+uniform mat4 dhProjectionInverse;
+uniform float dhFarPlane;
+
 out vec2 lmcoord;
 out vec2 texcoord;
 out vec4 glcolor;
 out vec3 normal;
+out vec3 viewPos;
 
 flat out int isEntityShadow;
+flat out int isLeaves;
 
 uniform int entityId;
 
@@ -24,4 +30,15 @@ void main() {
 	glcolor = gl_Color;
 	normal = gl_NormalMatrix * gl_Normal;
 	normal = mat3(gbufferModelViewInverse) * normal;
+
+    vec3 vPos = gl_Vertex.xyz;
+    vec3 cameraOffset = fract(cameraPosition);
+    vPos = floor(vPos + cameraOffset + 0.5) - cameraOffset;
+    viewPos = (mat3(gl_ModelViewMatrix) * vPos);
+
+	if (dhMaterialId == DH_BLOCK_LEAVES){
+		isLeaves = 1;
+	}else{
+		isLeaves = 0;
+	}
 }

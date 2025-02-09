@@ -21,7 +21,7 @@ layout(location = 2) out vec4 encodedNormal;
 layout(location = 3) out vec4 cloudBuffer;
 
 void main() {
-	#ifdef DISTANTHORIZONS
+	#ifdef DISTANT_HORIZONS
 		discard;
 	#endif
 
