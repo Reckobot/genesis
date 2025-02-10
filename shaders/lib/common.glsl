@@ -1,6 +1,8 @@
 const float ambientOcclusionLevel = 0;
 
 uniform vec3 shadowLightPosition;
+uniform mat4 shadowModelView;
+uniform mat4 shadowProjection;
 uniform mat4 gbufferModelViewInverse;
 uniform mat4 gbufferProjectionInverse;
 uniform mat4 gbufferModelView;
@@ -56,13 +58,22 @@ float fogify(float x, float w) {
 
 vec3 calcSkyColor(vec3 pos) {
 	float upDot = dot(pos, gbufferModelView[1].xyz); //not much, what's up with you?
-	return mix(BSC(skyColor, 1.1, 1.0, 1.0), fogColor, fogify(max((upDot*2)-0.1, 0.0), 0.01));
+	return mix(BSC(vec3(0.55, 0.74, 1), clamp(getLuminance(skyColor*2), 0.0, 1.0), 1.0, 1.0), fogColor, fogify(max((upDot), 0.0), 0.01));
 }
 
 vec3 screenToView(vec3 screenPos) {
 	vec4 ndcPos = vec4(screenPos, 1.0) * 2.0 - 1.0;
 	vec4 tmp = gbufferProjectionInverse * ndcPos;
 	return tmp.xyz / tmp.w;
+}
+
+vec3 distortShadowClipPos(vec3 shadowClipPos){
+	float distortionFactor = length(shadowClipPos.xy);
+	distortionFactor += 0.1;
+
+	shadowClipPos.xy /= distortionFactor;
+	shadowClipPos.z *= 0.25;
+	return shadowClipPos;
 }
 
 

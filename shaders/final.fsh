@@ -24,32 +24,47 @@ void main() {
 	vec3 pos = screenToView(vec3(texcoord.xy, depth));
 
 	vec3 fogcolor = calcSkyColor(normalize(pos));
-	float fogdensity = 1.25;
+	float fogdensity = 1.0;
 	bool doFog = false;
 
 	if ((depth < 1)){
-		doFog = true;
-	}
-
-	if (isEyeInWater == 1){
-		fogcolor = vec3(0.05,0.05,0.35);
-		fogdensity = 0.25;
-		doFog = true;
+		color.rgb = BSC(color.rgb, 1.0, 1.1, 1.0);
 	}
 
 	float renderdist;
 
 	#if RENDER_DISTANCE == 1
-		renderdist = 0.375;
+		renderdist = 0.1;
 	#elif RENDER_DISTANCE == 2
-		renderdist = 0.5;
+		renderdist = 0.175;
 	#elif RENDER_DISTANCE == 3
-		renderdist = 0.75;
+		renderdist = 0.4;
 	#elif RENDER_DISTANCE == 4
-		renderdist = 2.25;
+		renderdist = 0.6;
 	#endif
 
-	float dist = length(viewPos) / (64/renderdist*fogdensity);
+	if (texture(colortex3, texcoord) == vec4(1)){
+		renderdist *= 0.5;
+	}
+
+	#ifndef DISTANT_HORIZONS
+	if ((depth < 1)){
+		doFog = true;
+	}
+	#else
+		doFog = false;
+	#endif
+
+	if (isEyeInWater == 1){
+		fogcolor = vec3(0.05,0.05,0.35)*0.6;
+		fogdensity = 0.15;
+		renderdist = 8;
+		doFog = true;
+	}
+
+	renderdist /= RENDER_DISTANCE_MULT;
+
+	float dist = (length(viewPos) / (64/fogdensity))*4*renderdist;
 
 	#if RENDER_DISTANCE == 0
 		dist = length(viewPos) / far;
