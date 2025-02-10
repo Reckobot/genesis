@@ -10,6 +10,7 @@ uniform sampler2D lightmap;
 uniform sampler2D gtexture;
 in vec3 normal;
 flat in int isLeaves;
+flat in int isGrass;
 
 uniform float alphaTestRef = 0.1;
 
@@ -32,7 +33,7 @@ void main() {
 
 	#if PRESET == 0
 		vec3 compare = BSC(glcolor.rgb, 4.0, 1.0, 1.0);
-		if ((((compare.r + compare.b)/2)/compare.g) < 0.8){
+		if( (bool(isLeaves)||bool(isGrass))&&((((compare.r + compare.b)/2)/compare.g) < 0.8)){
 			vec3 tintcolor = vec3(0.4, 0.8, 0.2);
 			vec4 tint = vec4(tintcolor, glcolor.a);
 			if (!bool(isLeaves)){
@@ -45,11 +46,11 @@ void main() {
 			color.rgb = BSC(color.rgb, FOLIAGE_BRIGHTNESS, FOLIAGE_SATURATION, FOLIAGE_CONTRAST);
 		}else{
 			color = texture(gtexture, texcoord) * glcolor;
-			color.rgb = BSC(color.rgb, 1.0, 1.25, 1.0);
+			color.rgb = BSC(color.rgb, 1.0, 1.4, 1.0);
 		}
 	#else
 		color = texture(gtexture, texcoord) * glcolor;
-		color.rgb = BSC(color.rgb, 1.0, 1.3, 1.0);
+		color.rgb = BSC(color.rgb, 1.0, 1.25, 1.0);
 	#endif
 	vec2 lmc = lmcoord;
 	light = texture(lightmap, lmc);

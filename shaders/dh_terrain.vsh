@@ -13,6 +13,7 @@ out vec3 viewPos;
 
 flat out int isEntityShadow;
 flat out int isLeaves;
+flat out int isGrass;
 
 uniform int entityId;
 
@@ -40,5 +41,11 @@ void main() {
 		isLeaves = 1;
 	}else{
 		isLeaves = 0;
+	}
+
+	if (dhMaterialId == DH_BLOCK_GRASS){
+		isGrass = 1;
+	}else{
+		isGrass = 0;
 	}
 }
