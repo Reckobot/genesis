@@ -58,7 +58,7 @@ void main() {
 	if (isEyeInWater == 1){
 		fogcolor = vec3(0.05,0.05,0.35)*0.6;
 		fogdensity = 0.15;
-		renderdist = 4;
+		renderdist = 8;
 		doFog = true;
 	}
 
