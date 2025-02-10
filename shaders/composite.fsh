@@ -55,7 +55,7 @@ void main() {
 	}
 	shadow /= count;
 	shadow *= dot(worldLightVector, normal)*4;
-	shadow = clamp(shadow, 0.65, 1.0);
+	shadow = clamp(shadow, 0.75, 1.0);
 
 	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
 		if (depth != texture(depthtex1, texcoord).r){
