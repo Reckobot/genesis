@@ -1,8 +1,6 @@
 const float ambientOcclusionLevel = 0;
 
 uniform vec3 shadowLightPosition;
-uniform mat4 shadowModelView;
-uniform mat4 shadowProjection;
 uniform mat4 gbufferModelViewInverse;
 uniform mat4 gbufferProjectionInverse;
 uniform mat4 gbufferModelView;
@@ -18,8 +16,6 @@ uniform int logicalHeightLimit;
 
 uniform float viewWidth;
 uniform float viewHeight;
-
-uniform int frameCounter;
 
 const vec3 alphaFogColor = vec3(0.75, 0.85, 1.0);
 
@@ -67,22 +63,6 @@ vec3 screenToView(vec3 screenPos) {
 	vec4 ndcPos = vec4(screenPos, 1.0) * 2.0 - 1.0;
 	vec4 tmp = gbufferProjectionInverse * ndcPos;
 	return tmp.xyz / tmp.w;
-}
-
-vec3 distortShadowClipPos(vec3 shadowClipPos){
-	float distortionFactor = length(shadowClipPos.xy);
-	distortionFactor += 0.1;
-
-	shadowClipPos.xy /= distortionFactor;
-	shadowClipPos.z *= 0.25;
-	return shadowClipPos;
-}
-
-float IGN(vec2 coord, int frame, vec2 res)
-{
-    float x = float(coord.x * res.x) + 5.588238 * float(frame);
-    float y = float(coord.y * res.y) + 5.588238 * float(frame);
-    return mod(52.9829189 * mod(0.06711056*float(x) + 0.00583715*float(y), 1.0), 1.0);
 }
 
 
