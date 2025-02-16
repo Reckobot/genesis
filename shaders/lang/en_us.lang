@@ -1,10 +1,10 @@
-option.ALPHACRAFT = Genesis
+option.ALPHACRAFT = Genesis Beyond
 option.ALPHACRAFT.comment = Made by Recko! If you want to contact him, his username on discord is "reckobot".
 option.DISCLAIMER = Note
 option.DISCLAIMER.comment = As of right now, the shader CANNOT change the smooth lighting option, so you have to disable it yourself in video settings.
 value.DISCLAIMER.0 = HOVER FOR INFO
 
-value.ALPHACRAFT.0 = v4.8
+value.ALPHACRAFT.0 = dev
 
 value.RENDER_DISTANCE.0 = WORLD BORDER
 value.RENDER_DISTANCE.1 = FAR
