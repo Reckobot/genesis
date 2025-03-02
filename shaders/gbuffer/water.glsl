@@ -22,7 +22,7 @@ layout(location = 1) out vec4 light;
 layout(location = 2) out vec4 encodedNormal;
 
 void main() {
-	float brightness = 5;
+	float brightness = 4;
 	#if PRESET == 1
 		brightness = 4;
 	#endif
