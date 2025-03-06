@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<script>
+    function moveBackground(e) {
+        var element = document.body;
+        element.style.backgroundPositionX = ((-e.clientX*0.1)) + 'px';
+        element.style.backgroundPositionY = ((-e.clientY*0.1)) + 'px';
+        if (element.style.opacity == 0){
+            element.style.opacity = 1;
+        }
+    }
+</script>
+
+<head>
+    <title>Mortem</title>
+    <link rel="icon" type="image/x-icon" href="icon.jpeg">
+
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta property="og:title" content="Mortem"> 
+    <meta property="og:description" content="Here I am."> 
+    <meta property="og:image" content="icon.ico"> 
+    <meta property="og:url" content="https://reckobot.github.io/genesis"> 
+    <meta property="og:type" content="website"> 
+    <title>Home</title>
+</head>
+
+<style>
+    @font-face { font-family: Minecraft; src: url('minecraft.ttf'); }
+
+    body {
+        text-align: center;
+        background-color: black;
+        background-image: url(screenshots/mortem.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+        font-family: Minecraft;
+        font-size: 20px;
+        margin: 0% 0%;
+
+        text-shadow: 4px 4px #000000;
+
+        position: relative;
+        overflow-y:hidden;
+        height: 100vh;
+    }
+
+    a {
+        text-decoration: none;
+        color: yellow;
+        transition: color 0.5s;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: white;
+    }
+
+    h1 {
+        font-size: 16px;
+        width: 100vw;
+        margin: 10px auto;
+    }
+
+    h2 {
+        position: relative;
+    }
+
+    h3 {
+        width: 75vw;
+        margin: 0 auto;
+    }
+
+    h4 {
+        width: 75vw;
+        margin: 0 auto;
+        color: red;
+        font-size: 40px;
+    }
+</style>
+
+<h2>
+    <div style="font-size: 7.5vw">Mortem</div>
+
+    <br></br>
+    Download <a href="downloads/Mortem.mrpack">here</a>
+</h2>
+
+<h3>
+    Requires a .mrpack compatible minecraft launcher to install.
+    <br></br>
+</h3>
+
+<h4>
+    DISCLAIMER: THIS MODPACK CAN AND WILL CORRUPT YOUR WORLD. USE AT YOUR OWN RISK.
+</h4>
