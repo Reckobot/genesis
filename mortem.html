@@ -1,16 +1,5 @@
 <!DOCTYPE html>
 
-<script>
-    function moveBackground(e) {
-        var element = document.body;
-        element.style.backgroundPositionX = ((-e.clientX*0.1)) + 'px';
-        element.style.backgroundPositionY = ((-e.clientY*0.1)) + 'px';
-        if (element.style.opacity == 0){
-            element.style.opacity = 1;
-        }
-    }
-</script>
-
 <head>
     <title>Mortem</title>
     <link rel="icon" type="image/x-icon" href="icon.jpeg">
@@ -80,15 +69,17 @@
     }
 </style>
 
+<audio id="player" src="sound/whathaveyoudone.wav"></audio>
+
 <h2>
-    <div style="font-size: 7.5vw">Mortem</div>
+    <div style="font-size: 7.5vw">null</div>
 
     <br></br>
-    Download <a href="downloads/Mortem.mrpack">here</a>
+    <a href="downloads/Mortem.mrpack" onclick="document.getElementById('player').play()">null</a>
 </h2>
 
 <h3>
-    Requires a .mrpack compatible minecraft launcher to install.
+    requires a .mrpack compatible launcher
     <br></br>
 </h3>
 
