@@ -26,7 +26,7 @@ layout(location = 2) out vec4 encodedNormal;
 
 void main() {
 	#if PRESET == 0
-		if ((bool(isTintedAlpha))&&((((glcolor.r + glcolor.b)/2)/glcolor.g)<0.8)){
+		if ((bool(isTintedAlpha))&&((glcolor.r + glcolor.g + glcolor.b)/3 < 0.9)){
 			vec3 tintcolor = vec3(0.4, 0.8, 0.2);
 			vec4 tint = vec4(tintcolor, glcolor.a);
 			if (bool(isLeaves)){
