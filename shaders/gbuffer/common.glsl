@@ -69,7 +69,7 @@ void main() {
 	}
 
 	if (light.r < 0.985){
-		light.rgb = pow(light.rgb, vec3(6));
+		light.rgb = pow(light.rgb, vec3(3));
 	}else{
 		light.rgb = vec3(1);
 	}
