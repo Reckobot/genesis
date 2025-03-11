@@ -64,6 +64,16 @@ void main() {
 		ambient = 0.25;
 	}
 
+	if (light.r > 0.25){
+		ambient = 0.25;
+	}
+
+	if (light.r < 0.985){
+		light.rgb = pow(light.rgb, vec3(6));
+	}else{
+		light.rgb = vec3(1);
+	}
+
 	light.rgb = clamp(light.rgb, ambient, 1.0);
 	#ifdef FAST_LEAVES
 		if (bool(isLeaves)){

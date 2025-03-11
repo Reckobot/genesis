@@ -84,15 +84,23 @@ void main() {
 				}
 			}else{
 				fogcolor = alphaFogColor;
-				fogcolor = BSC(fogcolor, getLuminance(skyColor)*1.5, 1.0, 1.0);
+				fogcolor = BSC(fogcolor, clamp(getLuminance(skyColor)*1.5, 0.0, 1.0), 1.0, 1.0);
 				fogdensity = 0.9;
+				if (isEyeInWater == 1){
+					fogcolor = vec3(0.05,0.05,0.35)*0.6;
+					fogdensity *= 0.1;
+				}
 				float fogFactor = exp(-4*fogdensity * (1.0 - dist));
 				color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 			}
 		#else
 			fogcolor = alphaFogColor;
-			fogcolor = BSC(fogcolor, getLuminance(skyColor)*1.5, 1.0, 1.0);
+			fogcolor = BSC(fogcolor, clamp(getLuminance(skyColor)*1.5, 0.0, 1.0), 1.0, 1.0);
 			fogdensity = 0.9;
+			if (isEyeInWater == 1){
+				fogcolor = vec3(0.05,0.05,0.35)*0.6;
+				fogdensity *= 0.1;
+			}
 			float fogFactor = exp(-4*fogdensity * (1.0 - dist));
 			color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 		#endif
