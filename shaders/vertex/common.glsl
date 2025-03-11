@@ -10,6 +10,7 @@ flat out int isTintedAlpha;
 flat out int isEntityShadow;
 flat out int isLeaves;
 flat out int isGrass;
+flat out int isNonShaded;
 out float tintSaturation;
 
 uniform int entityId;
@@ -51,5 +52,11 @@ void main() {
 		isGrass = 1;
 	}else{
 		isGrass = 0;
+	}
+
+	if (mc_Entity.x == 103){
+		isNonShaded = 1;
+	}else{
+		isNonShaded = 0;
 	}
 }

@@ -6,6 +6,7 @@ uniform sampler2D colortex0;
 uniform sampler2D colortex1;
 uniform sampler2D colortex2;
 uniform sampler2D colortex3;
+uniform sampler2D colortex11;
 
 in vec2 texcoord;
 
@@ -23,14 +24,18 @@ void main() {
 
 	float depth = texture(depthtex0, texcoord).r;
 
-	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
-		float mult = 1.0;
-		mult *= encodedNormal.r;
-		mult *= 1-encodedNormal.r;
-		mult *= dot(encodedNormal.rgb, vec3(0,1,0));
+	if (texture(colortex11, texcoord).rgb != vec3(1)){
+		if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
+			float mult = 1.0;
+			mult *= encodedNormal.r;
+			mult *= 1-encodedNormal.r;
+			mult *= dot(encodedNormal.rgb, vec3(0,1,0));
 
-		mult = clamp(mult*4+0.25, 0.55, 1.0);
-		color.rgb *= mult;
+			mult = clamp(mult*4+0.25, 0.55, 1.0);
+			color.rgb *= mult;
+			color.rgb *= BSC(texture(colortex1, texcoord).rgb, 1.0, 0.0, 1.0);
+		}
+	}else{
 		color.rgb *= BSC(texture(colortex1, texcoord).rgb, 1.0, 0.0, 1.0);
 	}
 }

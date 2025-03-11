@@ -71,8 +71,21 @@ void main() {
 	#endif
 
 	#if RENDER_DISTANCE != 5
-		#if RENDER_DISTANCE == 0 || RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
+		#if RENDER_DISTANCE == 1 || RENDER_DISTANCE == 2
 			if (doFog){
+				float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+				color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
+			}
+		#elif RENDER_DISTANCE == 0
+			if (far > 80){
+				if (doFog){
+					float fogFactor = exp(-4*fogdensity * (1.0 - dist));
+					color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
+				}
+			}else{
+				fogcolor = alphaFogColor;
+				fogcolor = BSC(fogcolor, getLuminance(skyColor)*1.5, 1.0, 1.0);
+				fogdensity = 0.9;
 				float fogFactor = exp(-4*fogdensity * (1.0 - dist));
 				color.rgb = mix(color.rgb, fogcolor, clamp(fogFactor, 0.0, 1.0));
 			}

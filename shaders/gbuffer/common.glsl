@@ -18,11 +18,13 @@ in float tintSaturation;
 flat in int isEntityShadow;
 flat in int isLeaves;
 flat in int isGrass;
+flat in int isNonShaded;
 
-/* RENDERTARGETS: 0,1,2 */
+/* RENDERTARGETS: 0,1,2,11 */
 layout(location = 0) out vec4 color;
 layout(location = 1) out vec4 light;
 layout(location = 2) out vec4 encodedNormal;
+layout(location = 3) out vec4 grass;
 
 void main() {
 	#if PRESET == 0
@@ -37,6 +39,9 @@ void main() {
 			color = texture(gtexture, texcoord) * tint;
 			color.rgb = BSC(color.rgb, 1.0, 1.0, 0.8);
 			color.rgb = BSC(color.rgb, FOLIAGE_BRIGHTNESS, FOLIAGE_SATURATION, FOLIAGE_CONTRAST);
+			if (bool(isGrass)){
+				color.rgb = BSC(color.rgb, 1.1, 0.5, 1.0);
+			}
 		}else{
 			color = texture(gtexture, texcoord) * glcolor;
 		}
@@ -88,6 +93,10 @@ void main() {
 			discard;
 		}
 	#endif
+
+	if (bool(isNonShaded)||(bool(isGrass))){
+		grass.rgb = vec3(1);
+	}
 
 	color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
 }
