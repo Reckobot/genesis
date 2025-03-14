@@ -38,8 +38,22 @@ void main() {
 
 	vec2 lmc = lmcoord;
 	light = texture(lightmap, lmc);
-	light.rgb = BSC(light.rgb, 0.8, 1.0, 2.0);
-	light.rgb = clamp(light.rgb, 0.045, 1.0);
+
+	float ambient;
+
+	if (logicalHeightLimit == 384){
+		ambient = 0.045;
+	}else{
+		ambient = 0.25;
+	}
+
+	if (light.r < 0.985){
+		light.rgb = pow(light.rgb, vec3(3));
+	}else{
+		light.rgb = vec3(1);
+	}
+
+	light.rgb = clamp(light.rgb, ambient, 1.0);
 	if (color.a < alphaTestRef) {
 		discard;
 	}

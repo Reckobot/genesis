@@ -24,8 +24,8 @@ void main() {
 
 	float depth = texture(depthtex0, texcoord).r;
 
-	if (texture(colortex11, texcoord).rgb != vec3(1)){
-		if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
+	if ((depth < 1)&&(texture(colortex3, texcoord) == vec4(0))){
+		if (texture(colortex11, texcoord).rgb != vec3(1)){
 			float mult = 1.0;
 			mult *= encodedNormal.r;
 			mult *= 1-encodedNormal.r;
@@ -33,9 +33,7 @@ void main() {
 
 			mult = clamp(mult*4+0.25, 0.55, 1.0);
 			color.rgb *= mult;
-			color.rgb *= BSC(texture(colortex1, texcoord).rgb, 1.0, 0.0, 1.0);
 		}
-	}else{
-		color.rgb *= BSC(texture(colortex1, texcoord).rgb, 1.0, 0.0, 1.0);
 	}
+	color.rgb *= BSC(texture(colortex1, texcoord).rgb, 1.0, 0.0, 1.0);
 }

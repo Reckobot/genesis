@@ -33,7 +33,7 @@ void main() {
 
 			mult = clamp(mult*4+0.25, 0.55, 1.0);
 			color.rgb *= mult;
+			color.rgb *= BSC(texture(colortex1, texcoord).rgb, 1.0, 0.0, 1.0);
 		}
-		color.rgb *= BSC(texture(colortex1, texcoord).rgb, 1.0, 0.0, 1.0);
 	}
 }

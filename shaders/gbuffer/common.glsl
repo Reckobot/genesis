@@ -64,10 +64,6 @@ void main() {
 		ambient = 0.25;
 	}
 
-	if (light.r > 0.25){
-		ambient = 0.25;
-	}
-
 	if (light.r < 0.985){
 		light.rgb = pow(light.rgb, vec3(3));
 	}else{
@@ -106,6 +102,8 @@ void main() {
 
 	if (bool(isNonShaded)||(bool(isGrass))){
 		grass.rgb = vec3(1);
+	}else{
+		grass.rgb = vec3(0);
 	}
 
 	color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
