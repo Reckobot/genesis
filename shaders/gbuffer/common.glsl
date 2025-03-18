@@ -105,6 +105,7 @@ void main() {
 	}else{
 		grass.rgb = vec3(0);
 	}
+	grass.a = 1;
 
 	color.rgb = mix(color.rgb, entityColor.rgb, entityColor.a);
 }

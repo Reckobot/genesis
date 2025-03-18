@@ -22,9 +22,9 @@ layout(location = 1) out vec4 light;
 layout(location = 2) out vec4 encodedNormal;
 
 void main() {
-	float brightness = 4;
+	float brightness = 6;
 	#if PRESET == 1
-		brightness = 4;
+		brightness = 6;
 	#endif
 	if (bool(isWater)){
 		vec4 waterColor = vec4(vec3(0,0,1), 1);
